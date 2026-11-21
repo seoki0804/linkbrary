@@ -1,16 +1,14 @@
-import Header from "@/components/Header";
+import Header from '@/components/Header';
+import { RequireAuth } from '@/utils/AuthContext';
 
-export default function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+// 루트 레이아웃이 이미 <html>·<body>를 그리므로 여기서는 내용만 감싼다.
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko">
-      <body>
-        <Header />
-        <main>{children}</main>
-      </body>
-    </html>
+    <>
+      <Header />
+      <main>
+        <RequireAuth>{children}</RequireAuth>
+      </main>
+    </>
   );
 }

@@ -1,29 +1,9 @@
-import {
-  differenceInDays,
-  differenceInHours,
-  differenceInMinutes,
-  differenceInSeconds,
-} from 'date-fns';
+import { formatDistanceToNowStrict } from 'date-fns';
+import { ko } from 'date-fns/locale';
 
+/** '방금 전', '3분 전', '2개월 전', '1년 전'처럼 지금으로부터 얼마나 지났는지 한국어로 돌려준다. */
 export const formatUpdatedAt = (dateInput: string | Date) => {
-  const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput; // 문자열이면 Date 객체로 변환
-  const now = new Date(); // 현재 시간
-
-  const diffInDays = differenceInDays(now, date); // 일 단위
-  const diffInHours = differenceInHours(now, date); // 시간 단위
-  const diffInMinutes = differenceInMinutes(now, date); // 분 단위
-  const diffInSeconds = differenceInSeconds(now, date); // 초 단위
-
-  if (diffInSeconds < 60) {
-    return 'just now'; // Less than 1 minute
-  } else if (diffInMinutes < 60) {
-    return `${diffInMinutes} minutes ago`; // Less than 1 hour
-  } else if (diffInHours < 24) {
-    return `${diffInHours} hours ago`; // Less than 1 day
-  } else if (diffInDays < 30) {
-    return `${diffInDays} days ago`; // Less than 30 days
-  } else {
-    // More than one month
-    return 'a month ago';
-  }
+  const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput;
+  if (Date.now() - date.getTime() < 60_000) return '방금 전';
+  return formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
 };

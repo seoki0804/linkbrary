@@ -46,10 +46,11 @@ export default function Login() {
 
     if (!emailError && !passwordError && email && password) {
       try {
-        await login(email, password); 
-        window.location.href = '/';
-      } catch (error) {
-        console.error('로그인 실패:', error);
+        await login(email, password);
+        // 로그인이 필요해서 넘어온 경우에는 원래 보던 화면으로 돌려보낸다. 다른 사이트 주소는 받지 않는다.
+        const next = new URLSearchParams(window.location.search).get('next');
+        window.location.href = next && next.startsWith('/') && !next.startsWith('//') ? next : '/links';
+      } catch {
         setLoginError('로그인에 실패했습니다. 이메일과 비밀번호를 확인하세요.');
       }
     }
@@ -129,14 +130,6 @@ export default function Login() {
           </button>
           {loginError && <p className="text-[#ff5b56] text-[12px] mt-[6px]">{loginError}</p>}
         </form>
-
-        <div className="flex items-center justify-between mt-[32px] text-center bg-[#E7EFFB] border-[1px] border-[#CCD5E3] rounded-[8px] py-[12px] px-[24px]">
-          <p className='text-[14px]'>소셜 로그인</p>
-          <div className="flex gap-[16px]">
-            <Image src="/icons/google.svg" alt="구글 로그인" width={40} height={40} />
-            <Image src="/icons/kakao.svg" alt="카카오 로그인" width={40} height={40} />
-          </div>
-        </div>
       </div>
     </div>
   );

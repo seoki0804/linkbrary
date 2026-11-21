@@ -59,7 +59,7 @@ export default function Card({
         if (data) {
           setLink(Array.isArray(data) ? data : data.list || []);
           setFilteredLinks(Array.isArray(data) ? data : data.list || []);
-          const totalCount = Array.isArray(data) ? links.length : data.totalCount || 0;
+          const totalCount = Array.isArray(data) ? data.length : data.totalCount || 0;
           const calculatedTotalPages = Math.ceil(totalCount / pageSize);
           setTotalPages(calculatedTotalPages); // 총 페이지 수 설정
         }
@@ -189,8 +189,11 @@ export default function Card({
                         />
                         )}
                     </div>
-                    <p className="text-[16px] text-[#000000] mt-2 text-base line-clamp-2">
-                      {link.description}
+                    {link.title && (
+                      <p className="mt-2 line-clamp-1 text-[16px] font-semibold text-[#000000]">{link.title}</p>
+                    )}
+                    <p className="mt-1 line-clamp-2 text-[15px] text-[#333236]">
+                      {link.description || link.url}
                     </p>
                     <p className="text-[14px] text-[#333333]">{absoluteDate}</p>
                   </div>

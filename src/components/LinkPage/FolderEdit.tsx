@@ -36,7 +36,9 @@ export default function FolderEdit({
         setNewFolderName(folderName);
     }, [folderName]);
   
-    const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+    // 공유 주소는 로그인 없이 볼 수 있는 공유 페이지로 만든다 (/share?folder=폴더ID).
+    const currentUrl =
+      typeof window !== 'undefined' ? `${window.location.origin}/share?folder=${folderId}` : '';
   
     // 복사 성공 시 상태 업데이트
     const handleCopyClick = () => {
