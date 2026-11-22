@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import Logo from '../../../public/icons/logo.svg';
-import NoImage from '../../../public/images/NoImage.svg';
+import LinkThumbnail from '@/components/LinkThumbnail';
 import { getFolderById, getLinksByFolderId } from '@/api/api';
 import { FolderResponse, LinkResponse } from '@/types/api';
 import { formatUpdatedAt } from '@/utils/date';
@@ -75,14 +75,7 @@ function SharedFolder() {
             {links.map((link) => (
               <li key={link.id} className="overflow-hidden rounded-lg border bg-white shadow-lg transition hover:-translate-y-0.5">
                 <a href={LinkData(link.url) ? link.url : `https://${link.url}`} target="_blank" rel="noopener noreferrer" className="block">
-                  <Image
-                    src={link.imageSource || NoImage}
-                    alt=""
-                    width={340}
-                    height={200}
-                    className="h-[200px] w-full object-cover"
-                    unoptimized
-                  />
+                  <LinkThumbnail src={link.imageSource} className="h-[200px] w-full object-cover" />
                   <div className="p-4">
                     <p className="text-[13px] text-[#666666]">{formatUpdatedAt(link.createdAt)}</p>
                     {link.title && <p className="mt-2 line-clamp-1 font-semibold text-black">{link.title}</p>}

@@ -3,7 +3,7 @@
 import { getLinks, getFavorites, putFavoriteLink, getLinksByFolderId } from '@/api/api';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import NoImage from '../../public/images/NoImage.svg';
+import LinkThumbnail from './LinkThumbnail';
 import starEmpty from '../../public/icons/ic_star_empty.svg';
 import starFill from '../../public/icons/ic_star_fill.svg';
 import { usePathname } from 'next/navigation';
@@ -135,7 +135,7 @@ export default function Card({
             return (
               <li
                 key={link.id}
-                className="w-[340px] h-[334px] relative overflow-hidden rounded-lg border bg-white shadow-lg"
+                className="w-[340px] min-h-[334px] relative overflow-hidden rounded-lg border bg-white shadow-lg"
               >
                 <div className="relative block h-full w-full">
                   <Link
@@ -143,13 +143,10 @@ export default function Card({
                     target="_blank"
                     className="absolute inset-0 z-0"
                   />
-                  <Image
-                    src={link.imageSource || NoImage}
+                  <LinkThumbnail
+                    src={link.imageSource}
                     alt="링크 이미지"
-                    width={340}
-                    height={200}
                     className="object-cover w-[340px] h-[200px]"
-                    unoptimized
                   />
                   {isLinks && (
                     <button
@@ -195,7 +192,7 @@ export default function Card({
                     <p className="mt-1 line-clamp-2 text-[15px] text-[#333236]">
                       {link.description || link.url}
                     </p>
-                    <p className="text-[14px] text-[#333333]">{absoluteDate}</p>
+                    <p className="mt-2 text-[14px] text-[#333333]">{absoluteDate}</p>
                   </div>
                 </div>
               </li>

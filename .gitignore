@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 데모 계정 (공개하지 않음)
+DEMO_ACCOUNT.txt
