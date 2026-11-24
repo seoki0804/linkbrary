@@ -4,6 +4,8 @@
 팀 기간에 끝내지 못한 부분을 2026년 11월에 혼자 마무리한 저장소입니다. 팀 기간에는 메인 랜딩 페이지와
 반응형 레이아웃, 로그인 상태에 따른 버튼 표시, 링크 추가 버튼을 맡았습니다(아래 원본 README 참고).
 
+**배포** https://seoki-linkbrary.vercel.app · [공유 폴더 예시](https://seoki-linkbrary.vercel.app/share?folder=1810) (로그인 없이 볼 수 있습니다)
+
 | 링크 목록 | 공유된 폴더 (로그인 없이 보기) |
 | --- | --- |
 | ![링크](docs/screenshots/links.jpg) | ![공유](docs/screenshots/share.jpg) |
